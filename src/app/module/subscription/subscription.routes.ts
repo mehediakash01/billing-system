@@ -1,9 +1,9 @@
 import express from 'express';
-import { auth } from '../../middlewares/auth.js';
+import { auth } from '../../middlewares/auth';
 
-import { purchaseSubscriptionValidationSchema } from './subscription.validation.js';
-import { SubscriptionControllers } from './subscription.controller.js';
-import { validateRequest } from '../../middlewares/ValidateRequest.js';
+import { purchaseSubscriptionValidationSchema } from './subscription.validation';
+import { SubscriptionControllers } from './subscription.controller';
+import { validateRequest } from '../../middlewares/ValidateRequest';
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import cookieExtractor from 'cookie-parser';
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
-import { globalErrorHandler } from './app/middlewares/globalErrorHandler.js';
-import globalRouterRegistry from './app/routes/index.js';
+import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
+import globalRouterRegistry from './app/routes/index';
 
 const app: Application = express();
 

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import { AppError } from '../../errors/AppError.js';
+import { AppError } from '../../errors/AppError';
 
-import { TSubscription } from './subscription.interface.js';
-import { Subscription } from './subscription.model.js';
-import { Plan } from '../plan/plan.model.js';
+import { TSubscription } from './subscription.interface';
+import { Subscription } from './subscription.model';
+import { Plan } from '../plan/plan.model';
 
 const purchaseSubscriptionService = async (userId: string, planId: string, autoRenew = true) => {
   const session = await mongoose.startSession();

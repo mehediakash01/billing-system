@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { PlanServices } from './plan.service.js';
-import { sendResponse } from '../../utils/SendResponse.js';
-import { catchAsync } from '../../utils/CatchAsync.js';
+import { PlanServices } from './plan.service';
+import { sendResponse } from '../../utils/SendResponse';
+import { catchAsync } from '../../utils/CatchAsync';
 
 const createPlan = catchAsync(async (req: Request, res: Response) => {
   const result = await PlanServices.createPlanIntoDB(req.body);

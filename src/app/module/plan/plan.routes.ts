@@ -1,9 +1,9 @@
 import express from 'express';
-import { auth } from '../../middlewares/auth.js';
+import { auth } from '../../middlewares/auth';
 
-import { PlanControllers } from './plan.controller.js';
-import { createPlanValidationSchema } from './plan.validation.js';
-import { validateRequest } from '../../middlewares/ValidateRequest.js';
+import { PlanControllers } from './plan.controller';
+import { createPlanValidationSchema } from './plan.validation';
+import { validateRequest } from '../../middlewares/ValidateRequest';
 
 const router = express.Router();
 

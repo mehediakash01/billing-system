@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import config from '../config/index.js';
+import config from '../config/index';
 
 export const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;

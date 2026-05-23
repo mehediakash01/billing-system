@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TSubscription } from './subscription.interface.js';
+import { TSubscription } from './subscription.interface';
 
 const SubscriptionSchema = new Schema<TSubscription>(
   {

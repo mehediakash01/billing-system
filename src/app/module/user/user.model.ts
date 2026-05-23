@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
-import config from '../../config/index.js';
+import config from '../../config/index';
 
 export const UserSchema = new Schema(
   {

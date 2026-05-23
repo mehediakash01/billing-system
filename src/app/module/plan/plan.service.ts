@@ -1,5 +1,5 @@
-import { TPlan } from './plan.interface.js';
-import { Plan } from './plan.model.js';
+import { TPlan } from './plan.interface';
+import { Plan } from './plan.model';
 
 const createPlanIntoDB = async (payload: TPlan) => {
   const result = await Plan.create(payload);

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { AppError } from '../../errors/AppError.js';
-import { catchAsync } from '../../utils/CatchAsync.js';
-import { Subscription } from '../subscription/subscription.model.js';
+import { AppError } from '../../errors/AppError';
+import { catchAsync } from '../../utils/CatchAsync';
+import { Subscription } from '../subscription/subscription.model';
 
 const handlePaymentWebhook = catchAsync(async (req: Request, res: Response) => {
   // Webhook validation handshake auth checks (Emulating real stripe/bintray signatures)

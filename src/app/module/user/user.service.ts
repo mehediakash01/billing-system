@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import config from '../../config/index.js';
-import { AppError } from '../../errors/AppError.js';
-import { TUser } from './user.interface.js';
-import { User } from './user.model.js';
+import config from '../../config/index';
+import { AppError } from '../../errors/AppError';
+import { TUser } from './user.interface';
+import { User } from './user.model';
 
 const registerUserIntoDB = async (payload: TUser) => {
   const result = await User.create(payload);

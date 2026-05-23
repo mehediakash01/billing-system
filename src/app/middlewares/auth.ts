@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import config from '../config/index.js';
-import { AppError } from '../errors/AppError.js';
-import { catchAsync } from '../utils/CatchAsync.js';
+import config from '../config/index';
+import { AppError } from '../errors/AppError';
+import { catchAsync } from '../utils/CatchAsync';
 
 
 export const auth = (...requiredRoles: string[]) => {

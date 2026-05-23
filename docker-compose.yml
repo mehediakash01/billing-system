@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo_db_container:27017/subscription-billing
+      - JWT_ACCESS_SECRET=0c3f876b4c47a5589ae09d18b806a2050c27699eaa1019e631739bd457d9f26c
+      - BCRYPT_SOLT_ROUND=12
+    depends_on:
+      - mongo_db_container
+  mongo_db_container:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_billing_data:/data/db
+
+volumes:
+  mongo_billing_data:

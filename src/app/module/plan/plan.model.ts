@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TPlan } from './plan.interface.js';
+import { TPlan } from './plan.interface';
 
 const PlanSchema = new Schema<TPlan>(
   {

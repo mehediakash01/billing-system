@@ -1,8 +1,8 @@
 import colors from 'colors';
 import { Server } from 'http';
 import mongoose from 'mongoose';
-import app from './app.js';
-import config from './app/config/index.js';
+import app from './app';
+import config from './app/config/index';
 
 let server: Server;
 
@@ -12,7 +12,7 @@ async function bootstrap() {
     console.log(colors.green.bold('📊 Connected to MongoDB successfully.'));
 
     server = app.listen(config.port, () => {
-      console.log(colors.cyan.bold(`🚀 Server running dynamically on port: ${config.port}`));
+      console.log(colors.cyan.bold(` Server running dynamically on port: ${config.port}`));
     });
   } catch (err) {
     console.error(colors.red.bold('CRITICAL SYSTEM FAILURE INITIALIZING SERVER:'), err);

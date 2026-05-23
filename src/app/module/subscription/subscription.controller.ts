@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { SubscriptionServices } from './subscription.service.js';
-import { catchAsync } from '../../utils/CatchAsync.js';
-import { sendResponse } from '../../utils/SendResponse.js';
+import { SubscriptionServices } from './subscription.service';
+import { catchAsync } from '../../utils/CatchAsync';
+import { sendResponse } from '../../utils/SendResponse';
 
 const purchaseSubscription = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user?.userId;
