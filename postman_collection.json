@@ -42,6 +42,47 @@
         },
         "url": { "raw": "http://localhost:5000/api/v1/subscriptions/purchase" }
       }
+    },
+    {
+      "name": "Create Subscription Plan",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer <ADMIN_JWT_TOKEN>" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Premium\",\n  \"price\": 99,\n  \"durationInDays\": 30,\n  \"isActive\": true\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/v1/plans" }
+      }
+    },
+    {
+      "name": "Cancel Subscription",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer <CLIENT_JWT_TOKEN>" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/v1/subscriptions/<SUBSCRIPTION_ID>/cancel" }
+      }
+    },
+    {
+      "name": "Payment Webhook Update",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-webhook-signature", "value": "<HMAC_SHA256_SIGNATURE>" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event\": \"payment.succeeded\",\n  \"data\": {\n    \"subscriptionId\": \"<SUBSCRIPTION_ID>\"\n  }\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/v1/webhooks/payment-update" }
+      }
     }
   ]
 }

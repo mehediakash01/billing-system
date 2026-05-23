@@ -1,9 +1,22 @@
 import mongoose from 'mongoose';
 import { AppError } from '../../errors/AppError';
 
-import { TSubscription } from './subscription.interface';
 import { Subscription } from './subscription.model';
 import { Plan } from '../plan/plan.model';
+
+const expireSubscriptionIfNeeded = async (subscription: any, session: mongoose.ClientSession) => {
+  if (subscription.status !== 'active') {
+    return subscription;
+  }
+
+  if (new Date(subscription.expiryDate).getTime() > Date.now()) {
+    return subscription;
+  }
+
+  subscription.status = 'expired';
+  await subscription.save({ session });
+  return subscription;
+};
 
 const purchaseSubscriptionService = async (userId: string, planId: string, autoRenew = true) => {
   const session = await mongoose.startSession();
@@ -16,10 +29,18 @@ const purchaseSubscriptionService = async (userId: string, planId: string, autoR
     }
 
     // Identify active plans bound to the requesting account profile configuration layers
-    const existingActiveSub = await Subscription.findOne({
+    let existingActiveSub = await Subscription.findOne({
       userId,
       status: 'active',
     }).populate('planId').session(session);
+
+    if (existingActiveSub) {
+      await expireSubscriptionIfNeeded(existingActiveSub, session);
+
+      if (existingActiveSub.status === 'expired') {
+        existingActiveSub = null;
+      }
+    }
 
     if (existingActiveSub) {
       const activePlanDetails = existingActiveSub.planId as any;

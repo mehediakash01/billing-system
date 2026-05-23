@@ -1,12 +1,20 @@
 import { Request, Response } from 'express';
+import crypto from 'crypto';
 import { AppError } from '../../errors/AppError';
 import { catchAsync } from '../../utils/CatchAsync';
 import { Subscription } from '../subscription/subscription.model';
+import config from '../../config/index';
+
+const calculateWebhookSignature = (payload: unknown) => {
+  return crypto
+    .createHmac('sha256', config.webhook.secret as string)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+};
 
 const handlePaymentWebhook = catchAsync(async (req: Request, res: Response) => {
-  // Webhook validation handshake auth checks (Emulating real stripe/bintray signatures)
   const webhookSecret = req.headers['x-webhook-signature'];
-  if (!webhookSecret || webhookSecret !== 'secure_gateway_handshake_hash_999') {
+  if (!config.webhook.secret || !webhookSecret || webhookSecret !== calculateWebhookSignature(req.body)) {
     throw new AppError(401, 'Unauthorized or counterfeit webhook origin source signature detected.');
   }
 

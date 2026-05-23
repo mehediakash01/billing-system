@@ -1,10 +1,18 @@
 import { ErrorRequestHandler } from 'express';
 import config from '../config/index';
+import { logger } from '../utils/logger';
 
 export const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || 'Something went wrong!';
   let errorDetails = err;
+
+  logger.error('Request failed.', {
+    method: req.method,
+    path: req.originalUrl,
+    statusCode,
+    message,
+  });
 
   // Handle Mongoose Duplicate Key Error
   if (err.code === 11000) {
